@@ -1,83 +1,14 @@
 import React, { Component } from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import logo from './logo.svg';
-import './App.css';
-
-const size = {
-  small: 400,
-  medium: 960,
-  large: 1140
-};
-
-// in PX
-const above = Object.keys(size).reduce((acc, label) => {
-  acc[label] = (...args) => css`
-    @media (min-width: ${size[label]}px) {
-      ${css(...args)}
-    }
-  `;
-  return acc;
-}, {});
-
-// in Em
-const aboveEM = Object.keys(size).reduce((acc, label) => {
-  acc[label] = (...args) => css`
-    @media (min-width: ${size[label] / 16}em) {
-      ${css(...args)}
-    }
-  `;
-  return acc;
-}, {});
-
-console.log('above', above);
+import GlobalStyle from './Global';
+import { Heading, Button, CancelButton } from './elements';
 
 const Fake = ({ className }) => (
   <div className={className}>
     <h2>I'm a fake component</h2>
   </div>
 );
-
-// CSS Helper
-// Needed for props in mixin arguments
-const fixedTop = css`
-  position: fixed;
-  top: ${({ top }) => top + 'px'};
-  left: 0;
-`;
-//
-
-const Heading = styled.h1`
-  font-size: 2rem;
-  ${above.medium`
-    color: blue;
-  `}
-`;
-
-const color = 'white';
-
-const Button = styled.button`
-  background: indigo;
-  padding: 5px 20px;
-  margin: 7.5px;
-  border-radius: 4px;
-  border: none;
-  color: ${color};
-  font-size: 2rem;
-  cursor: pointer;
-  transition: all 0.3s;
-
-  &:hover {
-    transform: scale(1.025);
-  }
-  &:active {
-    transform: scale(0.975);
-  }
-`;
-
-const CancelButton = styled(Button)`
-  background: tomato;
-  ${fixedTop}
-`;
 
 const AppWrapper = styled.div`
   header {
@@ -115,6 +46,7 @@ class App extends Component {
             Learn React
           </a>
         </header>
+        <GlobalStyle />
       </AppWrapper>
     );
   }
