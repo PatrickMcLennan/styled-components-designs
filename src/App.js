@@ -1,17 +1,63 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import logo from './logo.svg';
 import './App.css';
 
-const color = 'white';
+const size = {
+  small: 400,
+  medium: 960,
+  large: 1140
+};
+
+// in PX
+const above = Object.keys(size).reduce((acc, label) => {
+  acc[label] = (...args) => css`
+    @media (min-width: ${size[label]}px) {
+      ${css(...args)}
+    }
+  `;
+  return acc;
+}, {});
+
+// in Em
+const aboveEM = Object.keys(size).reduce((acc, label) => {
+  acc[label] = (...args) => css`
+    @media (min-width: ${size[label] / 16}em) {
+      ${css(...args)}
+    }
+  `;
+  return acc;
+}, {});
+
+console.log('above', above);
+
+const Fake = ({ className }) => (
+  <div className={className}>
+    <h2>I'm a fake component</h2>
+  </div>
+);
+
+// CSS Helper
+// Needed for props in mixin arguments
+const fixedTop = css`
+  position: fixed;
+  top: ${({ top }) => top + 'px'};
+  left: 0;
+`;
+//
 
 const Heading = styled.h1`
   font-size: 2rem;
+  ${above.medium`
+    color: blue;
+  `}
 `;
 
+const color = 'white';
+
 const Button = styled.button`
-  background: ${({ type }) => (type === 'cancel' ? 'tomato' : 'indigo')};
-  padding: 5px 10px;
+  background: indigo;
+  padding: 5px 20px;
   margin: 7.5px;
   border-radius: 4px;
   border: none;
@@ -28,9 +74,23 @@ const Button = styled.button`
   }
 `;
 
+const CancelButton = styled(Button)`
+  background: tomato;
+  ${fixedTop}
+`;
+
 const AppWrapper = styled.div`
   header {
     background: teal;
+  }
+  ${Button} {
+    margin-bottom: 2rem;
+  }
+`;
+
+const DoubleFake = styled(Fake)`
+  h2 {
+    color: red;
   }
 `;
 
@@ -43,8 +103,10 @@ class App extends Component {
           <Heading>
             Edit <code>src/App.js</code> and save to reload.
           </Heading>
+          <DoubleFake />
+          <Fake />
           <Button>Save</Button>
-          <Button type="cancel">Cancel</Button>
+          <CancelButton top="100">Cancel</CancelButton>
           <a
             className="App-link"
             href="https://reactjs.org"
