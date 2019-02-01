@@ -1,18 +1,23 @@
 import React, { Component } from 'react';
 import GlobalStyle from './Global';
 import Header from './layouts/Header';
-import { Button } from './elements';
+import { Button, Card } from './elements';
 
 class App extends Component {
   render() {
     return (
       <div>
         <Header />
-        <Button size="small"> Say Hello</Button>
-        <Button size="small" type="cancel">
-          Don't Say Hello
-        </Button>
         <GlobalStyle />
+        <main>
+          <Card>
+            <h2>Card Heading</h2>
+            <Card.Button> Say Hello</Card.Button>
+            <Card.Button modifiers={['small', 'cancel']}>
+              Don't Say Hello
+            </Card.Button>
+          </Card>
+        </main>
       </div>
     );
   }

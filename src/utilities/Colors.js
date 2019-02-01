@@ -5,3 +5,5 @@ export const social = {
   twitter: '#00aced',
   facebook: '#3b5998'
 };
+
+// #19
