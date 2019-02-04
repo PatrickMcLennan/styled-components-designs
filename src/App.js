@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import styled from 'styled-components/macro';
 import GlobalStyle from './Global';
 import Header from './layouts/Header';
 import { Button, Card } from './elements';
@@ -9,7 +10,14 @@ class App extends Component {
       <div>
         <Header />
         <GlobalStyle />
-        <main>
+        <main
+          css={`
+            background: red;
+
+            h2 {
+              font-size: 100px;
+            }
+          `}>
           <Card>
             <h2>Card Heading</h2>
             <Card.Button> Say Hello</Card.Button>
