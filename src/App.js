@@ -20,7 +20,7 @@ class App extends Component {
           `}>
           <Card>
             <h2>Card Heading</h2>
-            <Card.Button> Say Hello</Card.Button>
+            <Card.Button as="a"> Say Hello</Card.Button>
             <Card.Button modifiers={['small', 'cancel']}>
               Don't Say Hello
             </Card.Button>
